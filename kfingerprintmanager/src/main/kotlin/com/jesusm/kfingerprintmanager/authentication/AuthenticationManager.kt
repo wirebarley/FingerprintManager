@@ -11,6 +11,7 @@ import com.jesusm.kfingerprintmanager.base.ui.System
 class AuthenticationManager(fingerprintAssetsManager: FingerprintAssetsManager,
                             system: System) : BaseFingerprintManager(fingerprintAssetsManager, system) {
     fun startAuthentication(authenticationCallback: KFingerprintManager.AuthenticationCallback,
+                            customDescription: String,
                             fragmentManager: FragmentManager) {
         fingerprintAssetsManager.initSecureDependencies(object : KFingerprintManager.InitialisationCallback {
             override fun onErrorFingerprintNotInitialised() {
@@ -26,7 +27,7 @@ class AuthenticationManager(fingerprintAssetsManager: FingerprintAssetsManager,
                 val builder = FingerprintAuthenticationDialogFragment.Builder()
                         .newFingerprintEnrolled(errorState == FingerprintErrorState.LOCK_SCREEN_RESET_OR_DISABLED)
 
-                showFingerprintDialog(builder, fragmentManager, object : FingerprintAuthenticationDialogFragment.AuthenticationDialogCallback {
+                showFingerprintDialog(builder, fragmentManager, customDescription, object : FingerprintAuthenticationDialogFragment.AuthenticationDialogCallback {
                     override fun onPasswordInserted(password: String) {
                         authenticationCallback.onSuccessWithManualPassword(password)
                     }
@@ -65,5 +66,9 @@ class AuthenticationManager(fingerprintAssetsManager: FingerprintAssetsManager,
                 authenticationCallback.onFingerprintNotAvailable()
             }
         })
+    }
+
+    fun checkAvailable(initialisationCallback: KFingerprintManager.InitialisationCallback) {
+        fingerprintAssetsManager.initSecureDependencies(initialisationCallback)
     }
 }

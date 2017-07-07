@@ -26,16 +26,22 @@ class KFingerprintManager @JvmOverloads constructor(context: Context,
     }
 
     fun encrypt(messageToEncrypt: String, callback: EncryptionCallback,
+                customDescription: String,
                 fragmentManager: FragmentManager) =
-            encryptionManager.encrypt(messageToEncrypt, callback, fragmentManager)
+            encryptionManager.encrypt(messageToEncrypt, callback, customDescription, fragmentManager)
 
     fun decrypt(messageToDecrypt: String, callback: DecryptionCallback,
+                customDescription: String,
                 fragmentManager: FragmentManager) =
-            encryptionManager.decrypt(messageToDecrypt, callback, fragmentManager)
+            encryptionManager.decrypt(messageToDecrypt, callback, customDescription, fragmentManager)
 
     fun authenticate(authenticationCallback: AuthenticationCallback,
+                     customDescription: String,
                      fragmentManager: FragmentManager) =
-            authenticationManager.startAuthentication(authenticationCallback, fragmentManager)
+            authenticationManager.startAuthentication(authenticationCallback, customDescription, fragmentManager)
+
+    fun checkAvailable(initialisationCallback: InitialisationCallback) =
+            authenticationManager.checkAvailable(initialisationCallback)
 
     interface FingerprintBaseCallback {
         fun onFingerprintNotRecognized()

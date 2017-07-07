@@ -15,7 +15,7 @@ import javax.crypto.spec.IvParameterSpec
 
 class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: FingerprintAssetsManager, system: System) : BaseFingerprintManager(fingerprintAssetsManager, system) {
 
-    fun encrypt(messageToEncrypt: String, encryptionCallback: KFingerprintManager.EncryptionCallback, fragmentManager: FragmentManager) {
+    fun encrypt(messageToEncrypt: String, encryptionCallback: KFingerprintManager.EncryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
         if (messageToEncrypt.isNullOrEmpty()) {
             encryptionCallback.onEncryptionFailed()
             return
@@ -71,7 +71,7 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                         }
 
                         val builder = FingerprintEncryptionDialogFragment.Builder()
-                        showFingerprintDialog(builder, fragmentManager, callback)
+                        showFingerprintDialog(builder, fragmentManager, customDescription, callback)
                     }
 
                     override fun onFingerprintNotAvailable() {
@@ -80,7 +80,7 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                 })
     }
 
-    fun decrypt(messageToDecrypt: String, callback: KFingerprintManager.DecryptionCallback, fragmentManager: FragmentManager) {
+    fun decrypt(messageToDecrypt: String, callback: KFingerprintManager.DecryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
         if (messageToDecrypt.isNullOrEmpty()) {
             callback.onDecryptionFailed()
             return
@@ -137,7 +137,7 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                 }
 
                 val builder = FingerprintEncryptionDialogFragment.Builder()
-                showFingerprintDialog(builder, fragmentManager, decryptionCallback)
+                showFingerprintDialog(builder, fragmentManager, customDescription, decryptionCallback)
             }
 
             override fun onFingerprintNotAvailable() {

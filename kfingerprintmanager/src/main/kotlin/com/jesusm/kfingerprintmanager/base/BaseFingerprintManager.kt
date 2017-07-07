@@ -12,10 +12,12 @@ abstract class BaseFingerprintManager(val fingerprintAssetsManager: FingerprintA
 
     fun showFingerprintDialog(builder: Builder<*, *>,
                               fragmentManager: FragmentManager,
+                              customDescription: String,
                               callback: KFingerprintManager.FingerprintBaseCallback) {
         builder.withCallback(callback)
                 .withCustomStyle(authenticationDialogStyle)
                 .withFingerprintHardwareInformation(fingerprintAssetsManager)
+                .withCustomDescription(customDescription)
 
         system.addDialogInfo(builder, fragmentManager)
         system.showDialog()

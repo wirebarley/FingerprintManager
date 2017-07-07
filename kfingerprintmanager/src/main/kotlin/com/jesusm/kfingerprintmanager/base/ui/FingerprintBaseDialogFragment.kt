@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatDialogFragment
 import android.support.v7.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.R
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager
@@ -27,6 +28,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
     lateinit var fingerprintContainer: View
     lateinit var alertDialog: AlertDialog
     private var customDialogStyle: Int = 0
+    private var customDescription: String? = null
 
     var presenter by Delegates.observable<T?>(null) {
         _, _, new ->
@@ -40,6 +42,9 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
         val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         dialogRootView = layoutInflater.inflate(R.layout.fingerprint_dialog_container, null, false)
         fingerprintContainer = dialogRootView.findViewById(R.id.fingerprint_dialog_content)
+        var description = dialogRootView.findViewById(R.id.fingerprint_description) as TextView
+        if (customDescription != null)
+            description.text = customDescription
         inflateViews(dialogRootView)
 
         val builder = AlertDialog.Builder(context, customDialogStyle)
@@ -49,6 +54,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
 
         return builder.create().apply {
             alertDialog = this
+            alertDialog.setCanceledOnTouchOutside(false)
             setOnShowListener({ onDialogShown() })
         }
     }
@@ -115,6 +121,12 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
         private var callback: KFingerprintManager.FingerprintBaseCallback? = null
         private lateinit var fingerPrintHardware: FingerprintHardware
         private lateinit var cryptoObject: FingerprintManagerCompat.CryptoObject
+        private var customDescription: String? = null
+
+        fun withCustomDescription(customDescription: String?): Builder<*, *> {
+            this.customDescription = customDescription
+            return this
+        }
 
         fun withCustomStyle(customStyle: Int): Builder<*, *> {
             this.customStyle = customStyle
@@ -148,6 +160,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
             if (customStyle != -1) {
                 dialogFragment.customDialogStyle = customStyle
             }
+            dialogFragment.customDescription = customDescription
 
             addProperties(dialogFragment)
 
