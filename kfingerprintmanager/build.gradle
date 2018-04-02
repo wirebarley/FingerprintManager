@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+repositories {
+    google()
+}
 
 android {
     compileSdkVersion parent.ext.compileSdkVersion
