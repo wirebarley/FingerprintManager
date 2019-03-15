@@ -101,7 +101,7 @@ class FingerprintAssetsManager(val context: Context, val keyStoreAlias: String,
         Log.e(javaClass.simpleName, message)
     }
 
-    fun getCryptoObject(): FingerprintManagerCompat.CryptoObject {
-        return FingerprintManagerCompat.CryptoObject(cipher)
+    fun getCryptoObject(): FingerprintManagerCompat.CryptoObject? {
+        return cipher?.let { FingerprintManagerCompat.CryptoObject(it) }
     }
 }

@@ -1,12 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven'
+
+group = 'com.wirebarley'
+version = '2.0.2-8'
+
 repositories {
     google()
 }
 
 android {
     compileSdkVersion parent.ext.compileSdkVersion
-    buildToolsVersion parent.ext.buildToolsVersion
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion parent.ext.minSdkVersion
@@ -35,17 +40,30 @@ android {
     }
 }
 
-dependencies {
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:design:' + parent.ext.supportLibsVersion
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.2-3"
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'http://nexus.wirebarley.com/repository/wb-release/') {
+                authentication(userName: 'wb-deploy', password: 'wbdeploy!@#')
+            }
+            snapshotRepository(url: 'http://nexus.wirebarley.com/repository/wb-snapshot/') {
+                authentication(userName: 'wb-deploy', password: 'wbdeploy!@#')
+            }
+        }
+    }
+}
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.7.21'
-    testCompile "com.nhaarman:mockito-kotlin:1.4.0"
-    testCompile 'org.jetbrains.kotlin:kotlin-test-junit:1.1.2-3'
+dependencies {
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    implementation 'com.android.support:design:' + parent.ext.supportLibsVersion
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:" + parent.ext.kotlin_version
+
+    testImplementation 'junit:junit:4.12'
+//    testCompile 'org.mockito:mockito-core:2.13.0'
+//    testCompile "com.nhaarman:mockito-kotlin:1.5.0"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit:' + parent.ext.kotlin_version
 }
 
 repositories {

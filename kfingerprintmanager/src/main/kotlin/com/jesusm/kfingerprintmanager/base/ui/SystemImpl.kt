@@ -1,6 +1,7 @@
 package com.jesusm.kfingerprintmanager.base.ui
 
 import android.support.v4.app.FragmentManager
+import android.view.WindowManager
 
 class SystemImpl : System {
     private val FINGERPRINT_DIALOG_TAG = "KFingerprintManager:fingerprintDialog"
@@ -9,7 +10,10 @@ class SystemImpl : System {
     private var dialogFragmentManager: FragmentManager? = null
 
     override fun showDialog() {
-        fingerprintBaseDialogFragment?.show(dialogFragmentManager, FINGERPRINT_DIALOG_TAG)
+        try {
+            fingerprintBaseDialogFragment?.show(dialogFragmentManager, FINGERPRINT_DIALOG_TAG)
+        } catch (e: WindowManager.BadTokenException) {
+        }
     }
 
     override fun addDialogInfo(builder: FingerprintBaseDialogFragment.Builder<out FingerprintBaseDialogFragment<*>, *>?,

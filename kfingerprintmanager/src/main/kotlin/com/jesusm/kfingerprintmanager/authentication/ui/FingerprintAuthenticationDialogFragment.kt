@@ -31,7 +31,7 @@ class FingerprintAuthenticationDialogFragment : FingerprintBaseDialogFragment<Fi
     }
 
     val passwordContainer : View by lazy {
-        dialogRootView.findViewById(R.id.fingerprint_dialog_backup_content)
+        dialogRootView.findViewById(R.id.fingerprint_dialog_backup_content) as View
     }
     val password by lazy {
         dialogRootView.findViewById(R.id.password) as EditText

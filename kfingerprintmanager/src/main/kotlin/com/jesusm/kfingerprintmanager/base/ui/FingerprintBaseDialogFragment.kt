@@ -39,10 +39,10 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = buildDialogContext()
-        val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layoutInflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         dialogRootView = layoutInflater.inflate(R.layout.fingerprint_dialog_container, null, false)
         fingerprintContainer = dialogRootView.findViewById(R.id.fingerprint_dialog_content)
-        var description = dialogRootView.findViewById(R.id.fingerprint_description) as TextView
+        val description = dialogRootView.findViewById(R.id.fingerprint_description) as TextView
         if (customDescription != null)
             description.text = customDescription
         inflateViews(dialogRootView)
@@ -78,7 +78,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
         presenter?.pause()
     }
 
-    private fun buildDialogContext(): Context =
+    private fun buildDialogContext(): Context? =
             if (customDialogStyle == 1) context else ContextThemeWrapper(context, customDialogStyle)
 
     override fun onFingerprintDisplayed() {
@@ -95,7 +95,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
     }
 
     override fun close() {
-        dismiss()
+        dismissAllowingStateLoss()
     }
 
     override fun onCancel(dialog: DialogInterface?) {
@@ -140,7 +140,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
 
         fun withFingerprintHardwareInformation(fingerprintAssetsManager: FingerprintAssetsManager): Builder<*, *> {
             this.fingerPrintHardware = fingerprintAssetsManager.fingerprintHardware
-            this.cryptoObject = fingerprintAssetsManager.getCryptoObject()
+            this.cryptoObject = fingerprintAssetsManager.getCryptoObject()!!
 
             return this
         }

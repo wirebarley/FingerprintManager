@@ -16,7 +16,7 @@ import javax.crypto.spec.IvParameterSpec
 class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: FingerprintAssetsManager, system: System) : BaseFingerprintManager(fingerprintAssetsManager, system) {
 
     fun encrypt(messageToEncrypt: String, encryptionCallback: KFingerprintManager.EncryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
-        if (messageToEncrypt.isNullOrEmpty()) {
+        if (messageToEncrypt.isEmpty()) {
             encryptionCallback.onEncryptionFailed()
             return
         }
@@ -36,11 +36,11 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                             override fun onAuthenticationSuccess(cryptoObject: FingerprintManagerCompat.CryptoObject) {
                                 val cipher = cryptoObject.cipher
                                 try {
-                                    val messageToEncryptBytes = cipher.doFinal(messageToEncrypt.toByteArray(charset("UTF-8")))
-                                    val ivBytes = cipher.parameters.getParameterSpec(IvParameterSpec::class.java).iv
+                                    val messageToEncryptBytes = cipher?.doFinal(messageToEncrypt.toByteArray(charset("UTF-8")))
+                                    val ivBytes = cipher?.parameters?.getParameterSpec(IvParameterSpec::class.java)?.iv
 
-                                    val encryptedMessage = EncryptionData(messageToEncryptBytes, ivBytes, encoder)
-                                    encryptionCallback.onEncryptionSuccess(encryptedMessage.print())
+                                    val encryptedMessage = messageToEncryptBytes?.let { ivBytes?.let { it1 -> EncryptionData(it, it1, encoder) } }
+                                    encryptedMessage?.print()?.let { encryptionCallback.onEncryptionSuccess(it) }
                                 } catch (e: UnsupportedEncodingException) {
                                     encryptionCallback.onEncryptionFailed()
                                 } catch (e: InvalidParameterSpecException) {
@@ -81,7 +81,7 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
     }
 
     fun decrypt(messageToDecrypt: String, callback: KFingerprintManager.DecryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
-        if (messageToDecrypt.isNullOrEmpty()) {
+        if (messageToDecrypt.isEmpty()) {
             callback.onDecryptionFailed()
             return
         }
@@ -108,10 +108,10 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                             val cipher = cryptoObject.cipher
 
                             val encryptedMessage = decryptionData.decodedMessage()
-                            val decryptedMessageBytes = cipher.doFinal(encryptedMessage)
-                            val decryptedMessage = String(decryptedMessageBytes)
+                            val decryptedMessageBytes = cipher?.doFinal(encryptedMessage)
+                            val decryptedMessage = decryptedMessageBytes?.let { String(it) }
 
-                            callback.onDecryptionSuccess(decryptedMessage)
+                            decryptedMessage?.let { callback.onDecryptionSuccess(it) }
                         } catch (e: IllegalBlockSizeException) {
                             callback.onDecryptionFailed()
                         } catch (e: BadPaddingException) {
