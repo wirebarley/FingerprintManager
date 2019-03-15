@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven'
 
 group = 'com.wirebarley'
-version = '2.0.2-8'
+version = '2.0.2-9'
 
 repositories {
     google()
