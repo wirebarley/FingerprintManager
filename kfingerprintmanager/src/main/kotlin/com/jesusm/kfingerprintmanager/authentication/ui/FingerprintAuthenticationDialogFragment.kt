@@ -3,8 +3,8 @@ package com.jesusm.kfingerprintmanager.authentication.ui
 import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import android.support.design.widget.TextInputLayout
-import android.support.v7.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
+import androidx.appcompat.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent

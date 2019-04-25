@@ -2,7 +2,7 @@ package com.jesusm.kfingerprintmanager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager
 import com.jesusm.kfingerprintmanager.base.hardware.FingerprintHardware
 import com.jesusm.kfingerprintmanager.base.keystore.KeyStoreManager
@@ -18,7 +18,7 @@ open class BaseTest {
 
     val mockFingerprintHardware: FingerprintHardware = mock()
     val mockKeyStoreManager: KeyStoreManager = mock()
-    val mockFragmentManager: FragmentManager = mock()
+    val mockFragmentManager: androidx.fragment.app.FragmentManager = mock()
     val mockSystem: FakeSystem = mock()
     val mockContext: Context = mock()
 
@@ -34,7 +34,7 @@ open class BaseTest {
 
         }
 
-        override fun addDialogInfo(builder: FingerprintBaseDialogFragment.Builder<out FingerprintBaseDialogFragment<*>, *>?, fragmentManager: FragmentManager?) {
+        override fun addDialogInfo(builder: FingerprintBaseDialogFragment.Builder<out FingerprintBaseDialogFragment<*>, *>?, fragmentManager: androidx.fragment.app.FragmentManager?) {
         }
     }
 

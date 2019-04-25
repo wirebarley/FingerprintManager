@@ -1,6 +1,6 @@
 package com.jesusm.kfingerprintmanager.base.model
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.jesusm.kfingerprintmanager.R
 
 enum class FingerprintErrorState(@StringRes val errorMessage: Int = -1) {

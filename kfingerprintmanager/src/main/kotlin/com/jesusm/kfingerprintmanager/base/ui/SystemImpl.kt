@@ -1,13 +1,13 @@
 package com.jesusm.kfingerprintmanager.base.ui
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import android.view.WindowManager
 
 class SystemImpl : System {
     private val FINGERPRINT_DIALOG_TAG = "KFingerprintManager:fingerprintDialog"
 
     private var fingerprintBaseDialogFragment: FingerprintBaseDialogFragment<*>? = null
-    private var dialogFragmentManager: FragmentManager? = null
+    private var dialogFragmentManager: androidx.fragment.app.FragmentManager? = null
 
     override fun showDialog() {
         try {
@@ -17,7 +17,7 @@ class SystemImpl : System {
     }
 
     override fun addDialogInfo(builder: FingerprintBaseDialogFragment.Builder<out FingerprintBaseDialogFragment<*>, *>?,
-                               fragmentManager: FragmentManager?) {
+                               fragmentManager: androidx.fragment.app.FragmentManager?) {
         builder?.let {
             fingerprintBaseDialogFragment = it.build()
             dialogFragmentManager = fragmentManager

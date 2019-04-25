@@ -1,6 +1,6 @@
 package com.jesusm.kfingerprintmanager.authentication
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.authentication.ui.FingerprintAuthenticationDialogFragment
 import com.jesusm.kfingerprintmanager.base.BaseFingerprintManager
@@ -12,7 +12,7 @@ class AuthenticationManager(fingerprintAssetsManager: FingerprintAssetsManager,
                             system: System) : BaseFingerprintManager(fingerprintAssetsManager, system) {
     fun startAuthentication(authenticationCallback: KFingerprintManager.AuthenticationCallback,
                             customDescription: String,
-                            fragmentManager: FragmentManager) {
+                            fragmentManager: androidx.fragment.app.FragmentManager) {
         fingerprintAssetsManager.initSecureDependencies(object : KFingerprintManager.InitialisationCallback {
             override fun onErrorFingerprintNotInitialised() {
                 authenticationCallback.onFingerprintNotAvailable()

@@ -1,9 +1,9 @@
 package com.jesusm.kfingerprintmanager
 
 import android.content.Context
-import android.support.annotation.StyleRes
-import android.support.v4.app.FragmentManager
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.annotation.StyleRes
+import androidx.fragment.app.FragmentManager
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.authentication.AuthenticationManager
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager
 import com.jesusm.kfingerprintmanager.base.ui.System
@@ -27,17 +27,17 @@ class KFingerprintManager @JvmOverloads constructor(context: Context,
 
     fun encrypt(messageToEncrypt: String, callback: EncryptionCallback,
                 customDescription: String,
-                fragmentManager: FragmentManager) =
+                fragmentManager: androidx.fragment.app.FragmentManager) =
             encryptionManager.encrypt(messageToEncrypt, callback, customDescription, fragmentManager)
 
     fun decrypt(messageToDecrypt: String, callback: DecryptionCallback,
                 customDescription: String,
-                fragmentManager: FragmentManager) =
+                fragmentManager: androidx.fragment.app.FragmentManager) =
             encryptionManager.decrypt(messageToDecrypt, callback, customDescription, fragmentManager)
 
     fun authenticate(authenticationCallback: AuthenticationCallback,
                      customDescription: String,
-                     fragmentManager: FragmentManager) =
+                     fragmentManager: androidx.fragment.app.FragmentManager) =
             authenticationManager.startAuthentication(authenticationCallback, customDescription, fragmentManager)
 
     fun checkAvailable(initialisationCallback: InitialisationCallback) =

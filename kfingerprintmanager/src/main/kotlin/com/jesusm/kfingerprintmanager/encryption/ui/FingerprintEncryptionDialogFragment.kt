@@ -1,6 +1,6 @@
 package com.jesusm.kfingerprintmanager.encryption.ui
 
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.base.ui.FingerprintBaseDialogFragment
 import com.jesusm.kfingerprintmanager.encryption.presenter.FingerprintEncryptionDialogPresenter

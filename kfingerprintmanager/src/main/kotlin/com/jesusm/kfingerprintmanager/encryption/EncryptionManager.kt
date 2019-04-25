@@ -1,7 +1,7 @@
 package com.jesusm.kfingerprintmanager.encryption
 
-import android.support.v4.app.FragmentManager
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.fragment.app.FragmentManager
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.base.BaseFingerprintManager
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager
@@ -15,7 +15,7 @@ import javax.crypto.spec.IvParameterSpec
 
 class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: FingerprintAssetsManager, system: System) : BaseFingerprintManager(fingerprintAssetsManager, system) {
 
-    fun encrypt(messageToEncrypt: String, encryptionCallback: KFingerprintManager.EncryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
+    fun encrypt(messageToEncrypt: String, encryptionCallback: KFingerprintManager.EncryptionCallback, customDescription: String, fragmentManager: androidx.fragment.app.FragmentManager) {
         if (messageToEncrypt.isEmpty()) {
             encryptionCallback.onEncryptionFailed()
             return
@@ -80,7 +80,7 @@ class EncryptionManager(val encoder: Encoder, fingerprintAssetsManager: Fingerpr
                 })
     }
 
-    fun decrypt(messageToDecrypt: String, callback: KFingerprintManager.DecryptionCallback, customDescription: String, fragmentManager: FragmentManager) {
+    fun decrypt(messageToDecrypt: String, callback: KFingerprintManager.DecryptionCallback, customDescription: String, fragmentManager: androidx.fragment.app.FragmentManager) {
         if (messageToDecrypt.isEmpty()) {
             callback.onDecryptionFailed()
             return

@@ -1,6 +1,6 @@
 package com.jesusm.kfingerprintmanager.authentication.presenter
 
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.base.BasePresenterTest
 import com.jesusm.kfingerprintmanager.base.model.FingerprintManagerCancellationSignal
 import com.jesusm.kfingerprintmanager.base.ui.presenter.FingerprintBaseDialogPresenter

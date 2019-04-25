@@ -1,6 +1,6 @@
 package com.jesusm.kfingerprintmanager.base
 
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.base.ui.FingerprintBaseDialogFragment.Builder
 import com.jesusm.kfingerprintmanager.base.ui.System
@@ -11,7 +11,7 @@ abstract class BaseFingerprintManager(val fingerprintAssetsManager: FingerprintA
     var authenticationDialogStyle: Int = -1
 
     fun showFingerprintDialog(builder: Builder<*, *>,
-                              fragmentManager: FragmentManager,
+                              fragmentManager: androidx.fragment.app.FragmentManager,
                               customDescription: String,
                               callback: KFingerprintManager.FingerprintBaseCallback) {
         builder.withCallback(callback)

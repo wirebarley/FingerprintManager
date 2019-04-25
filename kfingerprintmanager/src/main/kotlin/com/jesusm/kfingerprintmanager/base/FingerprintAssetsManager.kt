@@ -1,8 +1,8 @@
 package com.jesusm.kfingerprintmanager.base
 
 import android.content.Context
-import android.support.annotation.StringRes
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.annotation.StringRes
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import android.util.Log
 import com.jesusm.kfingerprintmanager.KFingerprintManager
 import com.jesusm.kfingerprintmanager.base.hardware.FingerprintHardware

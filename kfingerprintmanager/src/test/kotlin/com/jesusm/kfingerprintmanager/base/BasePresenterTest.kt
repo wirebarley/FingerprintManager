@@ -1,7 +1,7 @@
 package com.jesusm.kfingerprintmanager.base
 
 
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.authentication.presenter.FingerprintAuthenticationDialogPresenter
 import com.jesusm.kfingerprintmanager.base.hardware.FingerprintHardware
 import com.nhaarman.mockito_kotlin.mock

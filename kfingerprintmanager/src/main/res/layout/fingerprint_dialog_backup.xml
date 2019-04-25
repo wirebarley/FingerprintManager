@@ -22,7 +22,7 @@
     android:orientation="vertical"
     tools:showIn="@layout/fingerprint_dialog_container">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:imeOptions="actionGo"
             android:inputType="textPassword" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
         android:id="@+id/use_fingerprint_in_future_check"
