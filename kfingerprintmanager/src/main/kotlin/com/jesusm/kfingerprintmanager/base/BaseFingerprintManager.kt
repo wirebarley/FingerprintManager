@@ -11,7 +11,7 @@ abstract class BaseFingerprintManager(val fingerprintAssetsManager: FingerprintA
     var authenticationDialogStyle: Int = -1
 
     fun showFingerprintDialog(builder: Builder<*, *>,
-                              fragmentManager: androidx.fragment.app.FragmentManager,
+                              fragmentManager: FragmentManager,
                               customDescription: String,
                               callback: KFingerprintManager.FingerprintBaseCallback) {
         builder.withCallback(callback)

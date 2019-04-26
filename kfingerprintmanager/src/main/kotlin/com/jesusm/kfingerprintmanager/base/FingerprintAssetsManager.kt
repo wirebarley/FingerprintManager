@@ -40,10 +40,10 @@ class FingerprintAssetsManager(val context: Context, val keyStoreAlias: String,
         }
 
         try {
-            if (IVs == null) {
-                cipher = keyStoreManager.initDefaultCipher(keyStoreAlias)
+            cipher = if (IVs == null) {
+                keyStoreManager.initDefaultCipher(keyStoreAlias)
             } else {
-                cipher = keyStoreManager.initCipherForDecryption(keyStoreAlias, IVs)
+                keyStoreManager.initCipherForDecryption(keyStoreAlias, IVs)
             }
         } catch (e: KeyStoreManager.NewFingerprintEnrolledException) {
             handleError(callback, FingerprintErrorState.NEW_FINGERPRINT_ENROLLED)

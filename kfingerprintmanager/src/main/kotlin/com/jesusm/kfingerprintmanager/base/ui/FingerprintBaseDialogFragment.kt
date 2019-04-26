@@ -26,9 +26,11 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
     var callback: KFingerprintManager.FingerprintBaseCallback? = null
     lateinit var dialogRootView: View
     lateinit var fingerprintContainer: View
+    lateinit var tvAlert: TextView
     lateinit var alertDialog: AlertDialog
     private var customDialogStyle: Int = 0
     private var customDescription: String? = null
+
 
     var presenter by Delegates.observable<T?>(null) {
         _, _, new ->
@@ -41,6 +43,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
         val context = buildDialogContext()
         val layoutInflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         dialogRootView = layoutInflater.inflate(R.layout.fingerprint_dialog_container, null, false)
+        tvAlert = dialogRootView.findViewById(R.id.fingerprint_status)
         fingerprintContainer = dialogRootView.findViewById(R.id.fingerprint_dialog_content)
         val description = dialogRootView.findViewById(R.id.fingerprint_description) as TextView
         if (customDescription != null)
@@ -109,7 +112,7 @@ abstract class FingerprintBaseDialogFragment<T : FingerprintBaseDialogPresenter>
     }
 
     override fun onAuthenticationFailedWithHelp(help: String?) {
-        callback?.onAuthenticationFailedWithHelp(help)
+        tvAlert.text = help.toString()
     }
 
     override fun onFingerprintNotAvailable() {

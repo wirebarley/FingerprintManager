@@ -60,18 +60,16 @@ abstract class FingerprintBaseDialogPresenter(val view: View, var stage: Stage =
 
     override fun onAuthenticationError(errMsgId: Int, errString: CharSequence?) {
         if (cancellationSignal.isCancelled.not()) {
-            onAuthenticationFailed()
+            view.onAuthenticationFailedWithHelp(errString.toString())
         }
     }
 
     override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence?) {
         view.onAuthenticationFailedWithHelp(helpString.toString())
-        close()
     }
 
     override fun onAuthenticationFailed() {
         view.onFingerprintNotRecognized()
-        close()
     }
 
     fun onDialogCancelled() =

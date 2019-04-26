@@ -2,7 +2,6 @@ package com.jesusm.kfingerprintmanager
 
 import android.content.Context
 import androidx.annotation.StyleRes
-import androidx.fragment.app.FragmentManager
 import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.jesusm.kfingerprintmanager.authentication.AuthenticationManager
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager

@@ -30,7 +30,7 @@ class FingerprintAuthenticationDialogFragment : FingerprintBaseDialogFragment<Fi
         fun onPasswordInserted(password: String)
     }
 
-    val passwordContainer : View by lazy {
+    private val passwordContainer : View by lazy {
         dialogRootView.findViewById(R.id.fingerprint_dialog_backup_content) as View
     }
     val password by lazy {
@@ -50,12 +50,6 @@ class FingerprintAuthenticationDialogFragment : FingerprintBaseDialogFragment<Fi
     }
 
     private var startWithNewFingerprintEnrolled: Boolean = false
-
-    fun onPresenterChanged(new: FingerprintAuthenticationDialogPresenter) {
-        if (startWithNewFingerprintEnrolled) {
-            new.newFingerprintEnrolled()
-        }
-    }
 
     override fun inflateViews(rootView: View) {
         super.inflateViews(rootView)
@@ -177,7 +171,7 @@ class FingerprintAuthenticationDialogFragment : FingerprintBaseDialogFragment<Fi
     }
 
     class Builder : FingerprintBaseDialogFragment.Builder<FingerprintAuthenticationDialogFragment, FingerprintAuthenticationDialogPresenter>() {
-        internal var newFingerprintEnrolled: Boolean = false
+        private var newFingerprintEnrolled: Boolean = false
 
         fun newFingerprintEnrolled(newFingerprintEnrolled: Boolean): Builder {
             this.newFingerprintEnrolled = newFingerprintEnrolled

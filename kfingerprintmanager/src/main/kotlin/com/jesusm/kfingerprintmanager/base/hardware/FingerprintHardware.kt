@@ -10,7 +10,7 @@ import androidx.core.os.CancellationSignal
 import com.jesusm.kfingerprintmanager.utils.CompatUtils
 
 class FingerprintHardware(val context: Context,
-                          val fingerprintManager: FingerprintManager = FingerprintHardware.SystemFingerprintManager(context),
+                          val fingerprintManager: FingerprintManager = SystemFingerprintManager(context),
                           val compatUtils: CompatUtils = CompatUtils()) {
 
     fun isFingerprintAuthAvailable() = compatUtils.isMarshmallow() && fingerprintManager.isHardwareDetected && hasFingerprintRegistered()

@@ -2,7 +2,6 @@ package com.jesusm.kfingerprintmanager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.fragment.app.FragmentManager
 import com.jesusm.kfingerprintmanager.base.FingerprintAssetsManager
 import com.jesusm.kfingerprintmanager.base.hardware.FingerprintHardware
 import com.jesusm.kfingerprintmanager.base.keystore.KeyStoreManager
