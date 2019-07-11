@@ -29,10 +29,20 @@ class KFingerprintManager @JvmOverloads constructor(context: Context,
                 fragmentManager: androidx.fragment.app.FragmentManager) =
             encryptionManager.encrypt(messageToEncrypt, callback, customDescription, fragmentManager)
 
+    fun encryptChar(messageToEncrypt: CharArray, callback: EncryptionCallback,
+                customDescription: String,
+                fragmentManager: androidx.fragment.app.FragmentManager) =
+            encryptionManager.encryptChar(messageToEncrypt, callback, customDescription, fragmentManager)
+
     fun decrypt(messageToDecrypt: String, callback: DecryptionCallback,
                 customDescription: String,
                 fragmentManager: androidx.fragment.app.FragmentManager) =
             encryptionManager.decrypt(messageToDecrypt, callback, customDescription, fragmentManager)
+
+    fun decryptChar(messageToDecrypt: String, callback: DecryptionCharCallback,
+                customDescription: String,
+                fragmentManager: androidx.fragment.app.FragmentManager) =
+            encryptionManager.decryptChar(messageToDecrypt, callback, customDescription, fragmentManager)
 
     fun authenticate(authenticationCallback: AuthenticationCallback,
                      customDescription: String,
@@ -54,6 +64,12 @@ class KFingerprintManager @JvmOverloads constructor(context: Context,
 
     interface DecryptionCallback : FingerprintBaseCallback {
         fun onDecryptionSuccess(messageDecrypted: String)
+
+        fun onDecryptionFailed()
+    }
+
+    interface DecryptionCharCallback : FingerprintBaseCallback {
+        fun onDecryptionCharSuccess(messageDecrypted: CharArray)
 
         fun onDecryptionFailed()
     }

@@ -17,6 +17,9 @@ class EncryptionData(var encryptedMessage: String, var encryptedIVs: String?,
     constructor(encryptedMessage: ByteArray, encryptedIVs: ByteArray, encoder: Encoder) :
             this(encoder.encode(encryptedMessage), encoder.encode(encryptedIVs), encoder)
 
+    constructor(encryptedMessage: ByteArray, encoder: Encoder) :
+            this(encoder.encode(encryptedMessage), encoder.encode(encryptedMessage), encoder)
+
     fun print(): String = encryptedMessage + separator + encryptedIVs
     fun dataIsCorrect(): Boolean = separator.isNullOrEmpty().not() && encryptedIVs.isNullOrEmpty().not()
 
